@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'media', // Activa el modo oscuro usando clases,
+  darkMode: 'media', // Activa el modo oscuro usando clases
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
@@ -9,18 +9,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        "bg-primary": 'var(--color-bg-primary)',
-        "bg-secondary": 'var(--color-bg-secondary)',
-        primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
-        "btn-primary": 'var(--color-btn-primary)',
-        "btn-secondary": 'var(--color-btn-secondary)',
-      }
+        "background-1": 'var(--background-1)', // #F6EDFF
+        "button-1": 'var(--button-1)', // #E0B6FF
+        "button-2": 'var(--button-2)', // #FFFFFF
+        "card-1": 'var(--card-1)', // #D0BCFF
+        "color-1": 'var(--color-1)', // #FFFFFF
+        "color-2": 'var(--color-2)', // #1E1B1B
+        "color-3": 'var(--color-3)', // #494649
+        "progress-bar-1": 'var(--progress-bar-1)', // #8A20D5
+      },
     },
   },
   plugins: [
-        require('flowbite/plugin'),
-        
-    ],
+    require('flowbite/plugin'),
+  ],
 }
-

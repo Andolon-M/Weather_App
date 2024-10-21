@@ -2,20 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url(variables.css);
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Satoshi-Regular';
+    font-family: "OpenSans-Regular";
     transition: all 0.3s ease-in-out;
 }
 
+@import url(variables.css);
+
 :root{
-    --color-bg-primary: #2B292A;
-    --color-bg-secondary: #D9D9D9;
-    --color-primary: #000000;
-    --color-secondary: #808080;
-    --color-btn-primary: #93D8A2;
-    --color-btn-secondary: #FFFFFF;
+    --background-1: #F6EDFF;
+    --button-1: #E0B6FF;
+    --button-2: #FFFFFF;
+    --card-1: #D0BCFF;
+    --color-1: #FFFFFF;
+    --color-2: #1E1B1B;
+    --color-3: #494649;
+    --progress-bar-1: #8A20D5;
 }
