@@ -37,7 +37,7 @@ const formattedDate = ref('');
 
 // Función para obtener los datos del clima
 const fetchClima = async () => {   // Puedes hacer que esta ciudad sea dinámica
-    const url = `${import.meta.env.VITE_API_BASE_URL}/current.json?key=${import.meta.env.VITE_API_KEY}&q=${import.meta.env.VITE_API_DEFAULT_CITY_NAME}&lang=${import.meta.env.VITE_API_LANGUAGE}`;
+    const url = `https://${import.meta.env.VITE_API_BASE_URL}/current.json?key=${import.meta.env.VITE_API_KEY}&q=${import.meta.env.VITE_API_DEFAULT_CITY_NAME}&lang=${import.meta.env.VITE_API_LANGUAGE}`;
     console.log(url);
 
     // VITE_API_KEY =03c9fed6ba2042e9ba2124408242110
