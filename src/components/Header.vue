@@ -57,7 +57,6 @@ const fetchClima = async () => {   // Puedes hacer que esta ciudad sea dinámica
     }
 };
 
-// Función para formatear la fecha en el formato "January 18, 16:14"
 const formatDate = (dateString) => {
     const date = new Date(dateString);
 
@@ -75,8 +74,8 @@ const formatDate = (dateString) => {
 };
 
 // Llamar a la función fetchClima cuando el componente se monta
-onMounted(() => {
-    fetchClima();
+onMounted(async () => {
+    await fetchClima();
 });
 
 

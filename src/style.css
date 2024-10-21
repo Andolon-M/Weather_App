@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url(variables.css);
 
 *{
     padding: 0;
@@ -11,7 +12,7 @@
     color: var(--color-2)
 }
 
-@import url(variables.css);
+
 
 :root{
     --background-1: #f6edff;
