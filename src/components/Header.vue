@@ -234,7 +234,7 @@ const headerFooterClass = computed(() => {
 
 .header-body.scrolled :first-child h1 {
     font-size: 4em;
-    color: var(--color-1);
+    color: var(--color-2);
     margin: 0;
     text-transform: capitalize;
     letter-spacing: 0.1em;
@@ -243,7 +243,7 @@ const headerFooterClass = computed(() => {
 
 .header-body.scrolled :first-child p {
     font-size: 1em;
-    color: var(--color-1);
+    color: var(--color-2);
     margin-left: -30px;
     text-transform: capitalize;
     letter-spacing: 0.1em;
