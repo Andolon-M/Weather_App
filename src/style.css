@@ -8,17 +8,23 @@
     box-sizing: border-box;
     font-family: "OpenSans-Regular";
     transition: all 0.3s ease-in-out;
+    color: var(--color-2)
 }
 
 @import url(variables.css);
 
 :root{
-    --background-1: #F6EDFF;
+    --background-1: #f6edff;
     --button-1: #E0B6FF;
     --button-2: #FFFFFF;
-    --card-1: #D0BCFF;
+    --card-1: #e2d3fa;
     --color-1: #FFFFFF;
     --color-2: #1E1B1B;
     --color-3: #494649;
     --progress-bar-1: #8A20D5;
+}
+
+body{
+    height: 100vh;
+    overflow-y: hidden;
 }
