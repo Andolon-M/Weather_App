@@ -2,33 +2,84 @@
     <div :class="headerClass">
         <div :class="headerContainerClass">
             <div :class="headerHeadClass">
-                <p>city</p>
+                <p>{{ weather?.location?.name }}, {{ weather?.location?.region }} </p>
                 <input type="text" placeholder="Search">
             </div>
             <div :class="headerBodyClass">
                 <div>
-                    <h1>3°</h1>
-                    <p>free</p>
+                    <h1>{{ weather?.current?.temp_c }}°</h1>
+                    <p>feels like {{ weather?.current?.feelslike_c }}°</p>
                 </div>
                 <div>
-                    <img src="" alt="">
+                    <img :src="weather?.current?.condition?.icon" alt="">
                 </div>
             </div>
             <div :class="headerFooterClass">
-                <p>january</p>
-                <h4>day 3</h4>
+                <p>{{ formattedDate }}</p>
+                <h4>día {{ weather?.current?.temp_c }}° <br/> noche {{weather?.current?.temp_c}}°</h4>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 // Definición de las propiedades
 const props = defineProps({
     isScrolled: Boolean
 });
+
+
+// Crear un estado para almacenar los datos del clima
+const weather = ref(null);
+const formattedDate = ref('');
+
+// Función para obtener los datos del clima
+const fetchClima = async () => {   // Puedes hacer que esta ciudad sea dinámica
+    const url = `${import.meta.env.VITE_API_BASE_URL}/current.json?key=${import.meta.env.VITE_API_KEY}&q=${import.meta.env.VITE_API_DEFAULT_CITY_NAME}&lang=${import.meta.env.VITE_API_LANGUAGE}`;
+    console.log(url);
+
+    // VITE_API_KEY =03c9fed6ba2042e9ba2124408242110
+    // VITE_API_BASE_URL = http://api.weatherapi.com/v1
+    // VITE_API_DEFAULT_CITY_NAME = Bucaramanga
+    // VITE_API_LANGUAGE = es
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        weather.value = data;  // Almacenar los datos en la variable weather
+        console.log(weather.value);
+        // Formatear la fecha
+        formattedDate.value = formatDate(weather.value.location.localtime);
+    } catch (error) {
+        console.error('Error al obtener el clima:', error);
+    }
+};
+
+// Función para formatear la fecha en el formato "January 18, 16:14"
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+
+    // Opciones para formatear el mes, día y hora
+    const options = {
+        month: 'long',  // Nombre completo del mes
+        day: 'numeric', // Día del mes
+        hour: '2-digit', // Hora
+        minute: '2-digit', // Minutos
+        hour12: false, // Mostrar en formato 24 horas
+    };
+
+    // Formatear la fecha
+    return new Intl.DateTimeFormat('es-MX', options).format(date);
+};
+
+// Llamar a la función fetchClima cuando el componente se monta
+onMounted(() => {
+    fetchClima();
+});
+
+
 
 // Usar computed para determinar las clases del header
 const headerClass = computed(() => {
@@ -167,17 +218,18 @@ const headerFooterClass = computed(() => {
     color: var(--color-1);
     margin: 0;
     text-transform: capitalize;
-    letter-spacing: 0.1em;
+    letter-spacing: 0em;
     font-weight: 500;
 }
 
 .header-body :first-child p {
-    font-size: 1.4em;
+    font-size: 1em;
     color: var(--color-1);
     margin-left: -30px;
     text-transform: capitalize;
     letter-spacing: 0.1em;
     font-weight: 500;
+    text-wrap: nowrap;
 }
 
 
@@ -201,14 +253,12 @@ const headerFooterClass = computed(() => {
 
 
 .header-body>:last-child {
-    background: red;
     width: 40vw;
     height: 18vh;
     overflow: hidden;
 }
 
 .header-body.scrolled>:last-child {
-    background: red;
     width: 20vw;
     height: 9vh;
     overflow: hidden;
@@ -235,11 +285,13 @@ const headerFooterClass = computed(() => {
     width: 95%;
     padding-bottom: 0.8em;
 }
-.header-footer p{
+
+.header-footer p {
     color: var(--card-1);
     text-transform: capitalize;
 }
-.header-footer h4{
+
+.header-footer h4 {
     color: var(--card-1);
     text-transform: capitalize;
     width: 20vw;
