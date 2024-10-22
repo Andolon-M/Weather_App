@@ -1,7 +1,7 @@
 <template>
     <div class="w-full flex flex-col items-center">
-        <div class="flex flex-col items-center justify-center w-[93%] h-[721px] gap-2 mb-2">
-            <div className="grid grid-cols-6 grid-rows-12 gap-3 w-full h-full">
+        <div class="flex flex-col items-center justify-center w-[93%] h-[821px] gap-2 mb-2">
+            <div className="grid grid-cols-6 grid-rows-12 gap-3 w-full h-[69%]">
                 <div className="border rounded-2xl bg-card-2 col-span-3 row-span-2 px-4 py-1 flex flex-col items-end">
                     <div class="flex flex-row justify-start items-center gap-3 w-full h-full ">
                         <div
@@ -76,12 +76,52 @@
                         <p class="text-[0.7em] font-semibold text-nowrap capitalize">0%</p>
                     </div>
                 </div>
-                <div className="border rounded-2xl bg-card-2 col-span-6 row-span-4 row-start-5">5</div>
-                <div className="border rounded-2xl bg-card-2 col-span-6 row-span-4 row-start-9">6</div>
+                <div
+                    className="border rounded-2xl bg-card-2 col-span-6 row-span-4 row-start-5 px-4 py-1 flex flex-col items-end">
+
+                    <div class="flex flex-row justify-between w-full">
+                        <!-- Mostrar las próximas 5 horas a partir de la hora actual -->
+                        <div v-if="nextFiveHours.length > 0" class="flex flex-row">
+                            <div v-for="(hour, index) in nextFiveHours" :key="index" class="flex flex-col items-center">
+                                <!-- Mostrar 'now' si la hora coincide con la actual -->
+                                <p v-if="isCurrentHour(hour.time)">Now</p>
+                                <p v-else>{{ formatTime(hour.time) }}</p>
+                                <!-- Mostrar el icono del clima -->
+                                <img :src="`https:${hour.condition.icon}`" :alt="hour.condition.text" />
+                                <!-- Mostrar la temperatura -->
+                                <p>{{ hour.temp_c }}°C</p>
+
+                            </div>
+                        </div>
+                        <p v-else>No hay datos disponibles</p>
+                    </div>
+                </div>
+                <div
+                    className="border rounded-2xl bg-card-2 col-span-6 row-span-4 row-start-9 px-4 py-1 flex flex-col items-end overflow-hidden">
+                    <img src="../../public/img/Group%2068.svg" alt="" class="h-full w-full object-contain">
+
+                </div>
             </div>
 
-            <div class="grid grid-cols-6 grid-rows-6 gap-3 w-full h-[46%]">
-                <div class="border rounded-2xl bg-card-2 col-span-6 row-span-4">1</div>
+            <div class="grid grid-cols-6 grid-rows-6 gap-3 w-full h-[30%]">
+                <div class="border rounded-2xl bg-card-2 col-span-6 row-span-4 px-4 py-1 flex flex-col items-end overflow-y-scroll">
+                    <div class="flex justify-between items-center">
+                        <img src="https://cdn.weatherapi.com/weather/64x64/night/353.png" alt="rain-icon"
+                            class="icon" />
+                        <p>Chance of rain</p>
+                        <p>{{ maxRainChance }}%</p>
+                    </div>
+
+                    <div v-for="(hour, index) in nextFiveHours" :key="index" class="progress-bar-container">
+                        <div class="flex justify-between items-center mb-2">
+                            <p>{{ formatTime(hour.time) }}</p>
+                            <p>{{ hour.chance_of_rain }}%</p>
+                        </div>
+                        <div class="progress-bar-background">
+                            <div class="progress-bar" :style="{ width: `${hour.chance_of_rain}%` }"></div>
+                        </div>
+                    </div>
+                </div>
                 <div
                     class="border rounded-2xl bg-card-2 col-span-3 row-span-2 row-start-5 px-4 py-1 flex flex-col items-end">
                     <div class="flex flex-row justify-start items-center gap-3 w-full h-full ">
@@ -91,7 +131,8 @@
                         </div>
                         <div>
                             <p class="text-[0.8em] font-semibold text-nowrap capitalize">Sunrise</p>
-                            <p class="text-[0.9em] font-semibold m-0 capitalize">{{ weatherToday?.forecast?.forecastday[0]?.astro?.sunrise }}</p>
+                            <p class="text-[0.9em] font-semibold m-0 capitalize">{{
+                                weatherToday?.forecast?.forecastday[0]?.astro?.sunrise }}</p>
                         </div>
 
                     </div>
@@ -108,12 +149,13 @@
                         </div>
                         <div>
                             <p class="text-[0.8em] font-semibold text-nowrap capitalize">Sunset</p>
-                            <p class="text-[0.9em] font-semibold m-0 capitalize">{{ weatherToday?.forecast?.forecastday[0]?.astro?.sunset }}</p>
+                            <p class="text-[0.9em] font-semibold m-0 capitalize">{{
+                                weatherToday?.forecast?.forecastday[0]?.astro?.sunset }}</p>
                         </div>
 
                     </div>
                     <div class="flex flex-row -mt-2 justify-center items-center gap-1">
-                        <p class="text-[0.7em] font-semibold text-nowrap ">in  9h</p>
+                        <p class="text-[0.7em] font-semibold text-nowrap ">in 9h</p>
                     </div>
                 </div>
             </div>
@@ -125,11 +167,12 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 // Crear un estado para almacenar los datos del clima
 const weather = ref(null);
 const weatherToday = ref(null);
 const formattedDate = ref('');
+const hourlyData = ref([]);
 
 // Función para obtener los datos del clima
 const fetchClima = async () => {   // Puedes hacer que esta ciudad sea dinámica
@@ -138,7 +181,7 @@ const fetchClima = async () => {   // Puedes hacer que esta ciudad sea dinámica
     try {
         const response = await fetch(url);
         const data = await response.json();
-        weather.value = data;  
+        weather.value = data;
 
         // Formatear la fecha
         formattedDate.value = formatDate(weather.value.location.localtime);
@@ -169,18 +212,46 @@ const fetchClimaEspesifico = async (date) => {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        weatherToday.value = data;  
-        console.log(weatherToday.value);
-        
+        weatherToday.value = data;
+
     } catch (error) {
         console.error('Error al obtener el clima:', error);
     }
 }
 
+const currentHour = new Date().getHours();
+
+// Filtrar las próximas 5 horas a partir de la hora actual
+const nextFiveHours = computed(() => {
+    return hourlyData.value.filter(hour => {
+        const hourOfDay = new Date(hour.time).getHours();
+        return hourOfDay >= currentHour;
+    }).slice(0, 5);
+});
+
+
+// Función para formatear la hora
+// Función para formatear la hora en formato 12 horas (AM/PM)
+const formatTime = (time) => {
+    return new Date(time).toLocaleTimeString([], { hour: 'numeric', hour12: true });
+};
+
+
+// Función para verificar si la hora es la hora actual
+const isCurrentHour = (time) => {
+    const hourOfDay = new Date(time).getHours();
+    return hourOfDay === currentHour;
+};
+
+// Calcular el porcentaje máximo de lluvia para mostrar en la parte superior
+const maxRainChance = computed(() => {
+    return Math.max(...nextFiveHours.value.map(hour => hour.chance_of_rain));
+});
+
+
 // Llamar a la función fetchClima cuando el componente se monta
 onMounted(async () => {
     await fetchClima();
-
     const fecha = new Date();
 
     // Obtener los componentes de la fecha
@@ -193,7 +264,35 @@ onMounted(async () => {
 
     // Llamar a la función fetchClimaEspesifico con la fecha
     await fetchClimaEspesifico(fechaFormateada);
+
+    hourlyData.value = weatherToday.value?.forecast?.forecastday[0].hour;
+
+
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Estilo para las barras de progreso */
+.progress-bar-container {
+    width: 100%;
+}
+
+.progress-bar-background {
+    background-color: #e0d4f7;
+    border-radius: 8px;
+    height: 25px;
+    width: 70%;
+    margin-top: 4px;
+}
+
+.progress-bar {
+    background-color: var( --progress-bar-1);
+    height: 25px;
+    border-radius: 8px;
+}
+</style>

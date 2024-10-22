@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-2">
         <nav :class="navFixed ? 'fixed top-[5.8rem]' : 'bg-transparent'" class=" bg-card-1  w-full h-16 flex justify-center items-center">
             <ul class="nav_li">
-                <li>Today</li>
+                <li class="active">Today</li>
                 <li>Tomorrow</li>
                 <li>10 days</li>
             </ul>
