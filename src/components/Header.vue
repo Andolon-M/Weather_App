@@ -123,6 +123,7 @@ const headerFooterClass = computed(() => {
 .header.scrolled {
     background: none;
     transition: all 0.6s ease-in-out !important;
+
 }
 
 .header_container {
@@ -132,7 +133,7 @@ const headerFooterClass = computed(() => {
     align-items: center;
     flex-direction: column;
     transition: all 0.6s ease-in-out !important;
-    width: 95%;
+    width: 92%;
     top: 0%;
     transition: all 0.6s ease-in-out !important;
     justify-content: space-between;
@@ -143,13 +144,14 @@ const headerFooterClass = computed(() => {
     position: fixed;
     display: flex;
     width: 100%;
-    height: 15%;
+    padding: 0 3.2%;
+    height: 14%;
     top: 0%;
     color: var(--color-2) !important;
     transition: all 0s ease-in-out !important;
     justify-content: space-around;
     background: var(--card-1);
-    padding-bottom: 1emm;
+    margin-bottom: 1.5hv;
     border-radius: 0%;
 }
 
@@ -159,12 +161,12 @@ const headerFooterClass = computed(() => {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
-    height: 2.8vh;
+    width: 100%;
+    height: 2vh;
 }
 
 .header-head p {
-    font-size: 1.2em;
+    font-size: 1em;
     color: var(--color-1);
     text-transform: capitalize;
     letter-spacing: 0.1em;
@@ -197,11 +199,13 @@ const headerFooterClass = computed(() => {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
+    width: 100%;
+    height: 8vh;
 }
 
 .header-body.scrolled {
     justify-content: baseline;
+    margin-bottom: 1vh;
 }
 
 .header-body :first-child {
@@ -213,7 +217,7 @@ const headerFooterClass = computed(() => {
 }
 
 .header-body :first-child h1 {
-    font-size: 6em;
+    font-size: 4.5em;
     color: var(--color-1);
     margin: 0;
     text-transform: capitalize;
@@ -222,9 +226,9 @@ const headerFooterClass = computed(() => {
 }
 
 .header-body :first-child p {
-    font-size: 1em;
+    font-size: 0.8em;
     color: var(--color-1);
-    margin-left: -30px;
+    margin-left: -25px;
     text-transform: capitalize;
     letter-spacing: 0.1em;
     font-weight: 500;
@@ -233,7 +237,7 @@ const headerFooterClass = computed(() => {
 
 
 .header-body.scrolled :first-child h1 {
-    font-size: 4em;
+    font-size: 3.5em;
     color: var(--color-2);
     margin: 0;
     text-transform: capitalize;
@@ -242,7 +246,7 @@ const headerFooterClass = computed(() => {
 }
 
 .header-body.scrolled :first-child p {
-    font-size: 1em;
+    font-size: 0.8em;
     color: var(--color-2);
     margin-left: -30px;
     text-transform: capitalize;
@@ -281,7 +285,7 @@ const headerFooterClass = computed(() => {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
+    width: 100%;
     padding-bottom: 0.8em;
 }
 
@@ -293,7 +297,7 @@ const headerFooterClass = computed(() => {
 .header-footer h4 {
     color: var(--card-1);
     text-transform: capitalize;
-    width: 20vw;
+    width: 25vw;
     height: 5vh;
     text-wrap: wrap;
     text-align: right;

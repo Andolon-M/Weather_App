@@ -16,9 +16,10 @@
 
 :root{
     --background-1: #f6edff;
-    --button-1: #E0B6FF;
+    --button-1: #e0b6ff;
     --button-2: #FFFFFF;
     --card-1: #e2d3fa;
+    --card-2:#ebdeff;
     --color-1: #FFFFFF;
     --color-2: #1E1B1B;
     --color-3: #494649;
@@ -28,4 +29,8 @@
 body{
     height: 100vh;
     overflow-y: hidden;
+}
+
+.active {
+    background: var(--button-1);
 }

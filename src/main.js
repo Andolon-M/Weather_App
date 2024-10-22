@@ -3,8 +3,10 @@ import './style.css'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from './views/Home.vue';
+import Today from './views/Today.vue';
 const routes = [
-    { path: '/', name: 'Home', component: Home},
+    { path: '/home', name: 'Home', component: Home},
+    { path: '/', name: 'Today', component: Today},
 ]
 
 // crear objeto de rutas de vue router -- objeto de vr
