@@ -144,7 +144,7 @@
                         <div>
                             <p class="text-[0.8em] font-semibold text-nowrap capitalize">Sunrise</p>
                             <p class="text-[0.9em] font-semibold m-0 capitalize">{{
-                                weatherToday?.forecast?.forecastday[0]?.astro?.sunrise }}</p>
+                                weatherTomorrow?.forecast?.forecastday[0]?.astro?.sunrise }}</p>
                         </div>
 
                     </div>
@@ -162,7 +162,7 @@
                         <div>
                             <p class="text-[0.8em] font-semibold text-nowrap capitalize">Sunset</p>
                             <p class="text-[0.9em] font-semibold m-0 capitalize">{{
-                                weatherToday?.forecast?.forecastday[0]?.astro?.sunset }}</p>
+                                weatherTomorrow?.forecast?.forecastday[0]?.astro?.sunset }}</p>
                         </div>
 
                     </div>
