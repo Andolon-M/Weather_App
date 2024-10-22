@@ -106,7 +106,7 @@ const headerFooterClass = computed(() => {
 
 <style scoped>
 .header {
-    background: url('./img/background.jpg') no-repeat;
+    background: url('../../public/img/background.jpg') no-repeat;
     background-size: cover;
     background-position: bottom;
     height: 40vh;
