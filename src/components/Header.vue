@@ -16,7 +16,7 @@
             </div>
             <div :class="headerFooterClass">
                 <p>{{ formattedDate }}</p>
-                <h4>día {{ weather?.current?.temp_c }}° <br/> noche {{weather?.current?.temp_c}}°</h4>
+                <h4>day {{ weather?.current?.temp_c }}° <br/> nigth {{weather?.current?.temp_c}}°</h4>
             </div>
         </div>
     </div>
