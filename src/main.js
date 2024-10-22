@@ -4,9 +4,13 @@ import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from './views/Home.vue';
 import Today from './views/Today.vue';
+import Tomorrow from './views/Tomorrow.vue';
+import Week from './views/Wek.vue';
 const routes = [
     { path: '/home', name: 'Home', component: Home},
     { path: '/', name: 'Today', component: Today},
+    { path: '/tomorrow', name: 'Tomorrow', component: Tomorrow},
+    { path: '/week', name: 'Week', component: Week},
 ]
 
 // crear objeto de rutas de vue router -- objeto de vr

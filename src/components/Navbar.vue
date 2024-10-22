@@ -1,11 +1,20 @@
 <template>
     <div class="flex flex-col gap-2">
-        <nav :class="navFixed ? 'fixed top-[5.8rem]' : 'bg-transparent'" class=" bg-card-1  w-full h-16 flex justify-center items-center">
+        <nav :class="navFixed ? 'fixed top-[5.8rem]' : 'bg-transparent'"
+            class=" bg-card-1  w-full h-16 flex justify-center items-center">
             <ul class="nav_li">
-                <li class="active">Today</li>
-                <li>Tomorrow</li>
-                <li>10 days</li>
+                <li :class="{ active: $route.path === '/' }">
+                    <router-link to="/">Today</router-link>
+                </li>
+                <li :class="{ active: $route.path === '/tomorrow' }">
+                    <router-link to="/tomorrow">Tomorrow</router-link>
+                </li>
+                <li :class="{ active: $route.path === '/10-days' }">
+                    <router-link to="/week">10 days</router-link>
+                </li>
             </ul>
+
+
         </nav>
 
     </div>

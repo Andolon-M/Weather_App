@@ -1,6 +1,6 @@
 <template>
     <div class="w-full flex flex-col items-center">
-        <div class="flex flex-col items-center justify-center w-[93%] h-[821px] gap-2 mb-2">
+        <div class="flex flex-col items-center justify-center w-[93%] h-[821px] gap-3 mb-2">
             <div className="grid grid-cols-6 grid-rows-12 gap-3 w-full h-[69%]">
                 <div className="border rounded-2xl bg-card-2 col-span-3 row-span-2 px-4 py-1 flex flex-col items-end">
                     <div class="flex flex-row justify-start items-center gap-3 w-full h-full ">
@@ -104,22 +104,26 @@
             </div>
 
             <div class="grid grid-cols-6 grid-rows-6 gap-3 w-full h-[30%]">
-                <div class="border rounded-2xl bg-card-2 col-span-6 row-span-4 px-4 py-1 flex flex-col items-end overflow-y-scroll">
-                    <div class="flex justify-between items-center">
-                        <img src="https://cdn.weatherapi.com/weather/64x64/night/353.png" alt="rain-icon"
-                            class="icon" />
-                        <p>Chance of rain</p>
-                        <p>{{ maxRainChance }}%</p>
+                <div
+                    class="border rounded-2xl bg-card-2 col-span-6 row-span-4 px-4 py-1 flex flex-col items-end overflow-y-scroll">
+                    <div class="flex justify-between items-center w-full mb-2">
+                        <div
+                            class="w-9 h-9 bg-color-1 rounded-full flex justify-center items-center p-[6px] overflow-hidden">
+                            <img src="../../public/img/rainy.svg" alt="" class="w-full h-full object-contain">
+                        </div>
+                        <p class="font-semibold">Chance of rain</p>
+                        <p class="font-semibold">{{ maxRainChance }}%</p>
                     </div>
 
-                    <div v-for="(hour, index) in nextFiveHours" :key="index" class="progress-bar-container">
+                    <div v-for="(hour, index) in nextFiveHours" :key="index" class="progress-bar-container flex  flex-row justify-between items-center gap-y-3">
                         <div class="flex justify-between items-center mb-2">
                             <p>{{ formatTime(hour.time) }}</p>
-                            <p>{{ hour.chance_of_rain }}%</p>
+                            
                         </div>
                         <div class="progress-bar-background">
                             <div class="progress-bar" :style="{ width: `${hour.chance_of_rain}%` }"></div>
                         </div>
+                        <p>{{ hour.chance_of_rain }}%</p>
                     </div>
                 </div>
                 <div
@@ -207,7 +211,8 @@ const formatDate = (dateString) => {
 };
 
 const fetchClimaEspesifico = async (date) => {
-    const url = `https://${import.meta.env.VITE_API_BASE_URL}/forecast.json?key=${import.meta.env.VITE_API_KEY}&q=${import.meta.env.VITE_API_DEFAULT_CITY_NAME}&lang=${import.meta.env.VITE_API_LANGUAGE}&dt=${{ date }}`;
+    const url = `https://${import.meta.env.VITE_API_BASE_URL}/forecast.json?key=${import.meta.env.VITE_API_KEY}&q=${import.meta.env.VITE_API_DEFAULT_CITY_NAME}&lang=${import.meta.env.VITE_API_LANGUAGE}&dt=${ date }`;
+console.log(url);
 
     try {
         const response = await fetch(url);
@@ -286,12 +291,12 @@ onMounted(async () => {
     background-color: #e0d4f7;
     border-radius: 8px;
     height: 25px;
-    width: 70%;
+    width: 60%;
     margin-top: 4px;
 }
 
 .progress-bar {
-    background-color: var( --progress-bar-1);
+    background-color: var(--progress-bar-1);
     height: 25px;
     border-radius: 8px;
 }
