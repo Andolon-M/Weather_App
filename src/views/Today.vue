@@ -77,19 +77,26 @@
                     </div>
                 </div>
                 <div
-                    className="border rounded-2xl bg-card-2 col-span-6 row-span-4 row-start-5 px-4 py-1 flex flex-col items-end">
-
-                    <div class="flex flex-row justify-between w-full">
+                    className="border rounded-2xl bg-card-2 col-span-6 row-span-4 row-start-5 px-4 py-2 flex flex-col items-end">
+                    <div class="flex justify-start items-center w-full mb-2 gap-2">
+                        <div
+                            class="w-9 h-9 bg-color-1 rounded-full flex justify-center items-center p-[6px] overflow-hidden">
+                            <img src="../../public/img/history_toggle_off.svg" alt="" class="w-full h-full object-contain">
+                        </div>
+                        <p class="font-semibold">Chance of rain</p>
+                    </div>
+                    <div class="flex flex-row justify-center items-center h-full w-full">
                         <!-- Mostrar las próximas 5 horas a partir de la hora actual -->
-                        <div v-if="nextFiveHours.length > 0" class="flex flex-row">
-                            <div v-for="(hour, index) in nextFiveHours" :key="index" class="flex flex-col items-center">
+                        <div v-if="nextFiveHours.length > 0" class="flex flex-row w-full justify-between h-full">
+                            <div v-for="(hour, index) in nextFiveHours" :key="index"
+                                class="flex flex-col items-center justify-center ">
                                 <!-- Mostrar 'now' si la hora coincide con la actual -->
-                                <p v-if="isCurrentHour(hour.time)">Now</p>
-                                <p v-else>{{ formatTime(hour.time) }}</p>
+                                <p v-if="isCurrentHour(hour.time)" class="text-sm">Now</p>
+                                <p v-else class="text-sm">{{ formatTime(hour.time) }}</p>
                                 <!-- Mostrar el icono del clima -->
-                                <img :src="`https:${hour.condition.icon}`" :alt="hour.condition.text" />
+                                <img :src="`https:${hour.condition.icon}`" :alt="hour.condition.text" class="w-10" />
                                 <!-- Mostrar la temperatura -->
-                                <p>{{ hour.temp_c }}°C</p>
+                                <p class="font-semibold text-sm">{{ hour.temp_c }}°C</p>
 
                             </div>
                         </div>
@@ -97,7 +104,7 @@
                     </div>
                 </div>
                 <div
-                    className="border rounded-2xl bg-card-2 col-span-6 row-span-4 row-start-9 px-4 py-1 flex flex-col items-end overflow-hidden">
+                    className="border rounded-2xl bg-card-2 col-span-6 row-span-4 row-start-9 px-4 py-2 flex flex-col items-end overflow-hidden">
                     <img src="../../public/img/Group%2068.svg" alt="" class="h-full w-full object-contain">
 
                 </div>
@@ -115,10 +122,11 @@
                         <p class="font-semibold">{{ maxRainChance }}%</p>
                     </div>
 
-                    <div v-for="(hour, index) in nextFiveHours" :key="index" class="progress-bar-container flex  flex-row justify-between items-center gap-y-3">
+                    <div v-for="(hour, index) in nextFiveHours" :key="index"
+                        class="progress-bar-container flex  flex-row justify-between items-center gap-y-3">
                         <div class="flex justify-between items-center mb-2">
                             <p>{{ formatTime(hour.time) }}</p>
-                            
+
                         </div>
                         <div class="progress-bar-background">
                             <div class="progress-bar" :style="{ width: `${hour.chance_of_rain}%` }"></div>
@@ -127,7 +135,7 @@
                     </div>
                 </div>
                 <div
-                    class="border rounded-2xl bg-card-2 col-span-3 row-span-2 row-start-5 px-4 py-1 flex flex-col items-end">
+                    class="border rounded-2xl bg-card-2 col-span-3 row-span-2 row-start-5 px-4 py-2 flex flex-col items-end">
                     <div class="flex flex-row justify-start items-center gap-3 w-full h-full ">
                         <div
                             class="w-9 h-9 bg-color-1 rounded-full flex justify-center items-center p-[6px] overflow-hidden">
@@ -211,8 +219,8 @@ const formatDate = (dateString) => {
 };
 
 const fetchClimaEspesifico = async (date) => {
-    const url = `https://${import.meta.env.VITE_API_BASE_URL}/forecast.json?key=${import.meta.env.VITE_API_KEY}&q=${import.meta.env.VITE_API_DEFAULT_CITY_NAME}&lang=${import.meta.env.VITE_API_LANGUAGE}&dt=${ date }`;
-console.log(url);
+    const url = `https://${import.meta.env.VITE_API_BASE_URL}/forecast.json?key=${import.meta.env.VITE_API_KEY}&q=${import.meta.env.VITE_API_DEFAULT_CITY_NAME}&lang=${import.meta.env.VITE_API_LANGUAGE}&dt=${date}`;
+    console.log(url);
 
     try {
         const response = await fetch(url);
@@ -231,7 +239,7 @@ const nextFiveHours = computed(() => {
     return hourlyData.value.filter(hour => {
         const hourOfDay = new Date(hour.time).getHours();
         return hourOfDay >= currentHour;
-    }).slice(0, 5);
+    }).slice(0, 6);
 });
 
 

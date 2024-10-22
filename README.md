@@ -1,6 +1,5 @@
 ### 1. Clonar el repositorio
-
-Si no lo has hecho aún, clona el repositorio del proyecto en tu máquina local:
+Clona el repositorio del proyecto en tu máquina local:
 
 
 ### 3. Configurar variables de entorno
@@ -31,7 +30,7 @@ Esto inicia el servidor de desarrollo y puedes acceder a la aplicación en tu na
 http://localhost:3000
 ```
 
-### Comandos de npm importantes
+### Ejecucion
 
 - `npm run dev`: Inicia el servidor de desarrollo de Vite.
 - `npm run build`: Genera la aplicación optimizada para producción.
