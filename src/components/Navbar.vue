@@ -9,7 +9,7 @@
                 <li :class="{ active: $route.path === '/tomorrow' }">
                     <router-link to="/tomorrow">Tomorrow</router-link>
                 </li>
-                <li :class="{ active: $route.path === '/10-days' }">
+                <li :class="{ active: $route.path === '/week' }">
                     <router-link to="/week">10 days</router-link>
                 </li>
             </ul>
