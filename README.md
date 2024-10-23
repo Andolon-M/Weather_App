@@ -21,7 +21,7 @@ npm install
 Para ejecutar tanto el backend como el fronend puede usar el sigueinte comando:
 
 ```bash
-npm run serve
+npm run dev
 ```
 
 Esto inicia el servidor de desarrollo y puedes acceder a la aplicación en tu navegador en:
